@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>To-Do App with Firebase</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Firebase Compatibility SDKs (v8) -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+</head>
+<body>
+  <!-- Authentication Section -->
+  <div id="auth-section">
+    <div class="fixed-heading">
+      <h2>MY TO DO LIST</h2>
+    </div>
+    <div class="heading-credentials">
+      <div class="heading">
+        <h2>Login / Sign Up</h2>
+      </div>
+      <div class="credentials">
+        <input type="email" id="email" placeholder="Email" required /><br />
+        <input type="password" id="password" placeholder="Password" required /><br />
+        <button onclick="login()">Login</button><br />
+        <div id="loader" class="spinner" style="display: none;"></div>
+        <button onclick="signup()">Sign Up</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dashboard -->
+  <div id="dashboard" style="display: none;">
+    <h2>Welcome, <span id="userEmail"></span></h2>
+    <h3>Your To-Do List</h3>
+
+    <!-- Task Containers -->
+    <div class="task-containers">
+      <div class="task-column" id="dailyTasks">
+        <div class="dailyheading"><h4>🗓️ Daily</h4></div>
+        <ul class="task-list" id="dailyList"></ul>
+      </div>
+      <div class="task-column" id="repeatingTasks">
+        <div class="repeatingheading"><h4>🔁 Repeating</h4></div>
+        <ul class="task-list" id="repeatingList"></ul>
+      </div>
+      <div class="task-column" id="specifiedTasks">
+        <div class="specifiedheading"><h4>📌 Specified</h4></div>
+        <ul class="task-list" id="specifiedList"></ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Popup Add Todo Modal -->
+  <div id="todoModal" class="modal hidden">
+    <div class="modal-content">
+      <h2>Add New Todo</h2>
+      <input type="text" id="todoInput" placeholder="Enter your task" />
+      <select id="taskType">
+        <option value="daily">Daily</option>
+        <option value="repeating">Repeating</option>
+        <option value="specified">Specified</option>
+      </select>
+      <button onclick="addTodo()">Add</button>
+      <button id="closeModal" type="button">❌ Close</button>
+    </div>
+  </div>
+
+  <!-- Floating Action Buttons -->
+  <div class="fab-container">
+    <button class="fab" id="addBtn" title="Add Task" aria-label="Add Task">➕</button>
+    <button class="fab" id="settingsBtn" title="Settings" aria-label="Settings">⚙️</button>
+    <button class="fab" id="logoutBtn" title="Logout" aria-label="Logout">🔓</button>
+
+    <!-- Settings Dropdown -->
+    <div id="settingsDropdown" class="dropdown hidden">
+      <p onclick="showProfile()">👤 Profile</p>
+      <p onclick="toggleDarkMode()">🌙 Dark Mode</p>
+    </div>
+  </div>
+
+  <!-- App JavaScript -->
+  <script src="app.js"></script>
+</body>
+</html>
